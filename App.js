@@ -1,21 +1,23 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
+import useSplash from './globalConfigs/useSplash';
+import mainStyle from './globalStyles/mainStyle';
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+  const appLoaded = useSplash()
+
+  if(!appLoaded){
+    return null
+  }else{
+    return (
+      <View style={mainStyle.container}>
+        <Text style={{ fontFamily: "sfBold" }} >Open up App.js to start working on your app!</Text>
+        <StatusBar style="auto" />
+      </View>
+    )
+  }
+
+  
+}
