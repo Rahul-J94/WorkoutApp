@@ -4,6 +4,8 @@ import colorScheme from "../globalConfigs/useColorSchema"
 import { NavigationContainer } from '@react-navigation/native';
 import { customdark, customlight } from '../globalConfigs/themes';
 import Home from '../presentation/screens/Home';
+import ExcerciseDetail from '../presentation/screens/ExcerciseDetail';
+import { StatusBar } from 'expo-status-bar';
 
 export default function RootNavigation() {
 
@@ -18,12 +20,13 @@ export default function RootNavigation() {
                 }}
             >
                 <Stack.Screen 
-                    name="Home" component={Home} 
-                    options={{ title: null }}
+                    name="Home" component={Home}
                 />
+                <Stack.Screen 
+                    name="ExcerciseDetail" component={ExcerciseDetail}
+                ></Stack.Screen>
             </Stack.Navigator>
+            <StatusBar style="auto" />
         </NavigationContainer>
     )
 }
-
-

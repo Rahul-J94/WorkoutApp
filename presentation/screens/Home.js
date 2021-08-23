@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
+import { SafeAreaView } from 'react-native'
 import mainStyle from '../../globalStyles/mainStyle';
-import { StatusBar } from 'expo-status-bar';
+import { HOME_CAROUSAL } from '../../constants';
+import CarousalElem from '../components/CarousalElem';
 
 export default class Home extends Component {
     render() {
         return (
-            <View style={mainStyle.container}>
-                <Text style={{ fontFamily: "sfBold" }}>hihi from home</Text>
-                <StatusBar style="auto" />
-            </View>
+            <SafeAreaView style={mainStyle.container}>
+                <CarousalElem data={HOME_CAROUSAL} />
+            </SafeAreaView>
         )
     }
 }

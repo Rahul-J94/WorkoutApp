@@ -9,7 +9,7 @@ export default function App() {
   if(!appLoaded){
     return null
   }else{
-    return <RootNavigation />
+    return <RootNavigation />    
   }
   
 }
