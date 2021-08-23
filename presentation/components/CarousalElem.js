@@ -1,26 +1,16 @@
 import React, { Component } from 'react'
 import Carousel from 'react-native-snap-carousel';
 import { View, Text, Image } from "react-native"
-import { Dimensions } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
+import mainStyle, {windowWidth} from '../../globalStyles/mainStyle';
 
-const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
-
-// const carousalTypesList = {
-
-// }
-
-// function name(params) {
-    
-// }
 
 export default class CarousalElem extends Component {
 
     constructor(props) {
         super(props);
         this.data = this.props.data
-        // this.type = this.props.carousalType
+        this.navigation = this.props.navigate
         this.state = {
             activeIndex: 0
         }
@@ -36,29 +26,23 @@ export default class CarousalElem extends Component {
 
     _renderItem = ({item, index}) => {
         return (
-            <View style={{
-                    // backgroundColor:'floralwhite',
-                    borderWidth: 1,
-                    borderRadius: 25,
-                    height: windowHeight/2,
-                    borderColor: "#ececec"
-                    // padding: 10,
-                    // marginLeft: 20,
-                    // marginRight: 10, 
-                }}
+            <View style={mainStyle.carousalContainer}
             >
                 <View>
                     <Image 
                         source={ item.image } 
-                        style={{ 
-                            width: 248, height: windowHeight/3,
-                            borderTopRightRadius:25, borderTopLeftRadius: 25,
-                        }} 
+                        style={mainStyle.carousalImageBg}
                     ></Image>
                 </View>
                 <View style={{ padding: 10 }}>
-                    <Text style={{fontSize: 25, fontFamily: "sfBold"}}>{item.excercise}</Text>
-                    <Text style={{ padding: 5, fontFamily: "sfRegular", color: "#c0c0c0" }}>{item.repetation} repetation</Text>
+                    <Text style={mainStyle.carousalHeading}
+                        onPress={() => this.navigation.navigate("ExcerciseDetail", {
+                            id: item.key
+                        })}
+                    >
+                        {item.excercise}
+                    </Text>
+                    <Text style={mainStyle.carousallight}>{item.repetation} repetation</Text>
                     <View style={{ paddingTop: 5, flexDirection: 'row' }} >
                         {
                             this._returnStar(item.stars)
@@ -71,7 +55,7 @@ export default class CarousalElem extends Component {
 
     render() {
         return (
-            <View style={{ flex: 1, flexDirection:'row', justifyContent: 'center' }}>
+            <View style={mainStyle.carousalMain}>
                 <Carousel
                     ref={(c) => { this._carousel = c; }}
                     layout={'default'}

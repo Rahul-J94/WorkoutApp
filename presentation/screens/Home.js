@@ -5,10 +5,17 @@ import { HOME_CAROUSAL } from '../../constants';
 import CarousalElem from '../components/CarousalElem';
 
 export default class Home extends Component {
+
+    constructor(props) {
+        super(props);
+        this.navigation = this.props.navigation
+    }
+    
+
     render() {
         return (
             <SafeAreaView style={mainStyle.container}>
-                <CarousalElem data={HOME_CAROUSAL} />
+                <CarousalElem data={HOME_CAROUSAL} navigate={this.navigation} />
             </SafeAreaView>
         )
     }
