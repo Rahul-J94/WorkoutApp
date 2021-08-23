@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
 import mainStyle from '../../globalStyles/mainStyle';
+
+import { Dimensions, ImageBackground, StyleSheet, Text, View } from 'react-native';
+import ScrollBottomSheet from 'react-native-scroll-bottom-sheet';
+
+const windowHeight = Dimensions.get('window').height;
 
 export default class ExcerciseDetail extends Component {
 
@@ -8,20 +12,64 @@ export default class ExcerciseDetail extends Component {
         super(props);
         this.route = this.props.route
         this.navigation = this.props.navigation
-
-        console.log(this.props," /////");
     }
-    
 
     render() {
         return (
             <View style={mainStyle.container}>
-                <View 
-                    style={{ padding: 30 }}
-                >
-                    <Text>{ this.route.params.id }</Text>
-                </View>
+                <ImageBackground
+                    source
+                ></ImageBackground>
+                <ScrollBottomSheet
+                    componentType="FlatList"
+                    snapPoints={['0%', '50%', windowHeight - 200]}
+                    initialSnapIndex={2}
+                    renderHandle={() => (
+                    <View style={styles.header}>
+                        <View style={styles.panelHandle} />
+                    </View>
+                    )}
+                    data={Array.from({ length: 200 }).map((_, i) => String(i))}
+                    keyExtractor={i => i}
+                    renderItem={({ item }) => (
+                    <View style={styles.item}>
+                        <Text>{`Item ${item}`}</Text>
+                    </View>
+                    )}
+                    contentContainerStyle={styles.contentContainerStyle}
+                />
             </View>
         )
     }
 }
+
+
+const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+    },
+    contentContainerStyle: {
+      padding: 16,
+      backgroundColor: '#F3F4F9',
+    },
+    header: {
+      alignItems: 'center',
+      backgroundColor: 'white',
+      paddingVertical: 20,
+      borderTopLeftRadius: 20,
+      borderTopRightRadius: 20
+    },
+    panelHandle: {
+      width: 40,
+      height: 2,
+      backgroundColor: 'rgba(0,0,0,0.3)',
+      borderRadius: 4
+    },
+    item: {
+      padding: 20,
+      justifyContent: 'center',
+      backgroundColor: 'white',
+      alignItems: 'center',
+      marginVertical: 10,
+    },
+  });
