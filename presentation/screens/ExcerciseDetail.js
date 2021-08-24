@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import mainStyle from '../../globalStyles/mainStyle';
 
-import { Dimensions, ImageBackground, StyleSheet, Text, View } from 'react-native';
+import { Dimensions, ImageBackground, StyleSheet, Text, View, Button } from 'react-native';
 import ScrollBottomSheet from 'react-native-scroll-bottom-sheet';
+
+import { Button as IOSButton } from 'react-native-ios-kit';
 
 const windowHeight = Dimensions.get('window').height;
 
@@ -17,25 +19,38 @@ export default class ExcerciseDetail extends Component {
     render() {
         return (
             <View style={mainStyle.container}>
-                <ImageBackground
-                    source
-                ></ImageBackground>
+                <ImageBackground source={require("../../assets/images/high_jumps.jpg")} resizeMode="cover" style={styles.image}>
+                  <View style={{ padding: 20 }}>
+                    <Text style={styles.text}>Inside</Text>
+                    <IOSButton rounded inverted>
+                      Accept the challenge for $15
+                    </IOSButton>
+                  </View>
+                </ImageBackground>
+
+
                 <ScrollBottomSheet
-                    componentType="FlatList"
-                    snapPoints={['0%', '50%', windowHeight - 200]}
+                    componentType="ScrollView"
+                    snapPoints={['50%', '50%', windowHeight - 200]}
                     initialSnapIndex={2}
                     renderHandle={() => (
-                    <View style={styles.header}>
-                        <View style={styles.panelHandle} />
-                    </View>
+                      <View>
+                        <View style={styles.header}>
+                          <View style={styles.panelHandle} />
+                        </View>
+                        <View style={styles.contentContainerStyle}>
+                          <Text>Description:</Text>
+                          <Text>Loream </Text>
+                        </View>
+                      </View>
                     )}
-                    data={Array.from({ length: 200 }).map((_, i) => String(i))}
-                    keyExtractor={i => i}
-                    renderItem={({ item }) => (
-                    <View style={styles.item}>
-                        <Text>{`Item ${item}`}</Text>
-                    </View>
-                    )}
+                    // data={Array.from({ length: 200 }).map((_, i) => String(i))}
+                    // keyExtractor={i => i}
+                    // renderItem={({ item }) => (
+                    // <View style={styles.item}>
+                    //     <Text>{`Item ${item}`}</Text>
+                    // </View>
+                    // )}
                     contentContainerStyle={styles.contentContainerStyle}
                 />
             </View>
@@ -72,4 +87,9 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       marginVertical: 10,
     },
+    image: {
+      height: windowHeight-180
+    },
+    text: {
+    }
   });
