@@ -20,14 +20,13 @@ export default class ExcerciseDetail extends Component {
         return (
             <View style={mainStyle.container}>
                 <ImageBackground source={require("../../assets/images/high_jumps.jpg")} resizeMode="cover" style={styles.image}>
-                  <View style={{ padding: 20 }}>
+                  <View style={{ padding: 20, justifyContent: "flex-end", flex: 1, marginBottom: 15 }}>
                     <Text style={styles.text}>Inside</Text>
-                    <IOSButton rounded inverted>
+                    <IOSButton rounded inverted >
                       Accept the challenge for $15
                     </IOSButton>
                   </View>
                 </ImageBackground>
-
 
                 <ScrollBottomSheet
                     componentType="ScrollView"

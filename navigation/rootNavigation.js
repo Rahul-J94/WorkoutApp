@@ -6,6 +6,7 @@ import { customdark, customlight } from '../globalConfigs/themes';
 import Home from '../presentation/screens/Home';
 import ExcerciseDetail from '../presentation/screens/ExcerciseDetail';
 import { StatusBar } from 'expo-status-bar';
+import CustomHeader from '../presentation/components/CustomHeader';
 
 export default function RootNavigation() {
 
@@ -15,14 +16,20 @@ export default function RootNavigation() {
     return (
         <NavigationContainer theme={customTheme}>
             <Stack.Navigator initialRouteName="Home"
-                screenOptions={{
-                    headerShown: false
-                }}
+                // screenOptions={{
+                //     headerShown: false
+                // }}
             >
                 <Stack.Screen 
                     name="Home" component={Home}
+                    options={{ headerShown: false }}
                 />
                 <Stack.Screen 
+                    options={({ navigation, route }) => ({
+                        headerTitle: "",
+                        headerTransparent: true,
+                        headerRight: props => <CustomHeader {...props} />
+                    })}
                     name="ExcerciseDetail" component={ExcerciseDetail}
                 ></Stack.Screen>
             </Stack.Navigator>
